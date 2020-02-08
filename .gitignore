@@ -1,0 +1,18 @@
+# Ignoring the pycache files
+<<<<<<< HEAD
+!**/__pycache__/
+
+# Ignoring the venv
+venv/*
+=======
+__pycache__/
+>>>>>>> parent of 1938dbf... Ignored
+
+## Ignoring the get-pip.py
+get-pip.py
+
+## Ignoring the booking-test.py
+booking-test.py
+
+# Ignoring the .pyc files
+*.pyc
