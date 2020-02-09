@@ -28,7 +28,7 @@ def populate_json_file(logger):
         email_username = input("Please enter email address: ")
         email_password = input("Please enter email password: ")
         email_send_to = input("Please enter the email address which you want to send the email: ")
-    r = requests.get("https://raw.githubusercontent.com/abdulrafaykhan/Bus-Booking-Bot/master/some.json")
+    r = requests.get("https://raw.githubusercontent.com/abdulrafaykhan/Bus-Booking-Bot/master/template.json")
     response = r.json()
     response["email"] = airlift_email
     response["password"] = airlift_password
