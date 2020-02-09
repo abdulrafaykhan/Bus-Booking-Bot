@@ -23,6 +23,7 @@ import modules.get_booking_status as gbs
 import modules.confirm_book as cob
 import modules.get_trip_info as gti
 import modules.bring_trips as bt
+import modules.populate_json_file as pjf
 
  
 def main():
@@ -36,8 +37,8 @@ def main():
     status = path.exists("some.json")
     if status != True:
         # Incase the file with the credentials does not exists
-        logger.error("File with the authentication credentials does not exists. Exiting...")
-        sys.exit(0)
+        logger.error("File with the authentication credentials does not exists. Creating...")
+        pjf.populate_json_file(logger)
     ## Reading the login credentials from the JSON file
     with open("some.json") as json_file:
         try: 
@@ -70,26 +71,30 @@ def main():
     logger.info(booking_dates)
     # Checking the remaining balance
     rem_balance = cb.check_balance(logger, auth_token, data)
-    try:
-        if rem_balance <= 500:
-            # If the balance is less than Rs. 100
-            logger.error("Sorry, your remaining balance is insufficient for the booking")
-            logger.error("Sending the low balance warning email...")
-            se.send_emails(logger, True, rem_balance, data)
+
+    if not data["send_email_username"] or not data["send_email_password"] or not data["send_email_to"]:
+        logger.info("The email credentials were not provided. No email will be sent")
+    else:
+        try:
+            if rem_balance <= 500:
+                # If the balance is less than Rs. 100
+                logger.error("Sorry, your remaining balance is insufficient for the booking")
+                logger.error("Sending the low balance warning email...")
+                se.send_emails(logger, True, rem_balance, data)
+                return None
+        except NameError as e:
+            logger.error("There was some issue getting the remaining balance")
             return None
-    except NameError as e:
-        logger.error("There was some issue getting the remaining balance")
-        return None
-    try: 
-        if rem_balance <= 200:
-            # If the balance is less than Rs. 100
-            logger.error("Sorry, your remaining balance is insufficient for the booking")
-            logger.error("Sending the low balance warning email...")
-            se.send_emails(logger, True, rem_balance, data)
+        try: 
+            if rem_balance <= 200:
+                # If the balance is less than Rs. 100
+                logger.error("Sorry, your remaining balance is insufficient for the booking")
+                logger.error("Sending the low balance warning email...")
+                se.send_emails(logger, True, rem_balance, data)
+                return None
+        except NameError as e:
+            logger.error("There was some issue getting the remaining balance")
             return None
-    except NameError as e:
-        logger.error("There was some issue getting the remaining balance")
-        return None
 
 
     # Initiate the booking process
@@ -102,10 +107,12 @@ def main():
         bt.bring_nearby_trips(logger, auth_token, date, data, False)
 
 
-
     # Send the email to email the logs
-    se.send_emails(logger, False, rem_balance, data)
-
+    if not data["send_email_username"] or not data["send_email_password"] or not data["send_email_to"]: 
+        logger.info("The email credentials were not provided. No email will be sent")
+    else: 
+        logger.info("Sending the final email...")
+        se.send_emails(logger, False, rem_balance, data)
 
 
     # Close the JSON file handler
@@ -113,7 +120,6 @@ def main():
 
 
     return None
-
 
 # Calling the main function
 if __name__ == '__main__':
