@@ -16,3 +16,6 @@ booking-test.py
 
 # Ignoring the .pyc files
 *.pyc
+
+# Ignoring the some.json file
+some.json
