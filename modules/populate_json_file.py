@@ -39,5 +39,4 @@ def populate_json_file(logger):
     f = open("some.json", "w")
     f.write(json.dumps(response))
     f.close()
-    print(json.dumps(response, indent=2))
     return None
