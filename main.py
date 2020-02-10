@@ -39,6 +39,7 @@ def main():
         # Incase the file with the credentials does not exists
         logger.error("File with the authentication credentials does not exists. Creating...")
         pjf.populate_json_file(logger)
+
     ## Reading the login credentials from the JSON file
     with open("some.json") as json_file:
         try: 
