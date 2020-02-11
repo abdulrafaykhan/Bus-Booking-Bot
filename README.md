@@ -4,13 +4,13 @@ A bot programmed to automate the process of booking daily commute buses.
 <h2>Requirements </h2>
 This bot has been coded using Python 3.7. If you need any help in setting up a Python 3.7 env, follow through with the following method to install Python 3.7 along with virtual environment package on Ubuntu (for other OSes, feel free to open an issue): 
 <ol>
-  <li>apt-get install python3.7 python3.7-dev python3-pip</li>
-  <li>wget https://bootstrap.pypa.io/get-pip.py</li>
-  <li>python3.7 get-pip.py</li>
-  <li>python3.7 -m pip install virtualenv</li>
-  <li>python3.7 -m virtualenv --python=/usr/bin/python3.7 venv</li>
- <p>Finally, to activate the virtual environment, use the following command: </p>
-  <li>. venv/bin/activate</li>
+  <li>`apt-get install python3.7 python3.7-dev python3-pip`</li>
+  <li>`wget https://bootstrap.pypa.io/get-pip.py`</li>
+  <li>`python3.7 get-pip.py`</li>
+  <li>`python3.7 -m pip install virtualenv`</li>`
+  <li>`python3.7 -m virtualenv --python=/usr/bin/python3.7 venv`</li>
+Finally, to activate the virtual environment, use the following command:
+  <li>`. venv/bin/activate`</li>
 </ol>
 
 <h2>Flow</h2>
