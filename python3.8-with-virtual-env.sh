@@ -88,6 +88,17 @@ else
 	exit 1
 fi
 
+# Installing the requirements
+echo "Installing the requirements" | tee -a installation.log
+pip install -r requirements.txt 
+# Error Handling
+if [ $? -eq 0 ]; then
+	echo "Requirements Installed Successfully" | tee -a installation.log
+else
+	echo "Failed to install requirements successfully" | tee -a installation.log 
+	exit 1
+fi
+
 
 # Ending block
 echo "Installation completed successfully!" | tee -a installation.log
