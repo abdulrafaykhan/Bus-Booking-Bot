@@ -78,21 +78,19 @@ def main():
     else:
         try:
             if rem_balance <= 500:
-                # If the balance is less than Rs. 100
+                # If the balance is less than Rs. 500
                 logger.error("Sorry, your remaining balance is insufficient for the booking")
                 logger.error("Sending the low balance warning email...")
                 se.send_emails(logger, True, rem_balance, data)
-                return None
         except NameError as e:
             logger.error("There was some issue getting the remaining balance")
             return None
         try: 
             if rem_balance <= 200:
-                # If the balance is less than Rs. 100
+                # If the balance is less than Rs. 200
                 logger.error("Sorry, your remaining balance is insufficient for the booking")
                 logger.error("Sending the low balance warning email...")
                 se.send_emails(logger, True, rem_balance, data)
-                return None
         except NameError as e:
             logger.error("There was some issue getting the remaining balance")
             return None
